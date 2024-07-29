@@ -14,7 +14,7 @@ const app= express();
 
 // using cors 
 const corsOption = {
-    origin:"http://localhost:5173",
+    origin:"https://bitwise-learning.netlify.app",
     methods:"POST , PUT , GET , DELETE , PATCH ,HEAD",
     credentials:true
 }

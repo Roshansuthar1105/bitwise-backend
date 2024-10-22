@@ -26,7 +26,14 @@ const userSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  watchlist: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Course',
+    },
+  ],
 });
+
 
 userSchema.pre("save", async function (next) {
   const user = this;

@@ -35,6 +35,58 @@ const getAllCourses = async (req, res) => {
     next(error);
   }
 };
+const getOneCourse = async (req,res)=>{
+  try {
+    const id = req.params.id;
+    const course = await Course.findOne({_id:id});
+    return res.status(200).json(course);
+  } catch (error) {
+    next(error);
+  }
+}
+const addNewCourse = async (req,res)=>{
+  try {
+    const newCourse = await Course.create(req.body);
+    return res.status(200).json({message:"Course added successfully"});
+  } catch (error) {
+    next(error);
+  }
+}
+const updateCourse = async (req,res)=>{
+  try {
+    const id = req.params.id;
+    
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: "Request body is empty" });
+    }
+
+    const updatedCourse = await Course.findByIdAndUpdate(
+      id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedCourse) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    return res.status(200).json({ 
+      message: "Course updated successfully",
+      course: updatedCourse 
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+const deleteCourse = async (req,res)=>{
+  try {
+    const id = req.params.id;
+    const deletedCourse = await Course.deleteOne({_id:id});
+    return res.status(200).json(deletedCourse);
+  } catch (error) {
+    next(error);
+  }
+}
 const findOneUser = async (req,res)=>{
   try {
     const Id =await req.params.id;
@@ -76,4 +128,4 @@ const deleteContact = async (req,res)=>{
   }
 
 }
-export { getAllUsers , getAllContacts , deleteContact ,getAllCourses , deleteUser, findOneUser ,updateOneUser };
+export { getAllUsers , getAllContacts , deleteContact ,getAllCourses , deleteUser, findOneUser ,updateOneUser , addNewCourse , updateCourse , deleteCourse , getOneCourse };

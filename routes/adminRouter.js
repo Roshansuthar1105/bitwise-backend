@@ -13,6 +13,18 @@ adminRouter
   .route("/courses")
   .get(authMiddleware, adminMiddleware, adminController.getAllCourses);
 adminRouter
+  .route("/courses/add")
+  .post(authMiddleware, adminMiddleware, adminController.addNewCourse);
+adminRouter
+  .route("/courses/update/:id")
+  .patch(authMiddleware, adminMiddleware, adminController.updateCourse);
+adminRouter
+  .route("/courses/getcourse/:id")
+  .get(authMiddleware, adminMiddleware, adminController.getOneCourse);
+adminRouter
+  .route("/courses/delete/:id")
+  .delete(authMiddleware, adminMiddleware, adminController.deleteCourse);
+adminRouter
   .route("/contacts/delete/:id")
   .delete(authMiddleware, adminMiddleware, adminController.deleteContact);
 adminRouter

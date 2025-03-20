@@ -51,6 +51,8 @@ export const getWatchlist = async (req, res) => {
 export const user = async (req, res) => {
   try {
     const user = req.user;
+    // const list =await user.populate("watchlist")  ;
+    // console.log(list,"user.....")
     return res.status(200).json({ user });
   } catch (error) {
     res.status(400).json({ message: error });
